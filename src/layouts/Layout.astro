@@ -1,0 +1,133 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Meu Portfólio de Projetos" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="/" class="logo">Portfólio</a>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/#projetos">Projetos</a></li>
+          <li><a href="/#sobre">Sobre</a></li>
+          <li><a href="/#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer>
+      <p>&copy; 2026 - Meu Portfólio</p>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --cor-primaria: #6366f1;
+    --cor-secundaria: #818cf8;
+    --cor-fundo: #0f172a;
+    --cor-superficie: #1e293b;
+    --cor-texto: #f1f5f9;
+    --cor-texto-secundario: #94a3b8;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+  }
+
+  a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  a:hover {
+    color: var(--cor-secundaria);
+  }
+
+  header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: var(--cor-superficie);
+    padding: 1rem 2rem;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--cor-texto);
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+  }
+
+  nav a {
+    color: var(--cor-texto-secundario);
+  }
+
+  nav a:hover {
+    color: var(--cor-texto);
+  }
+
+  main {
+    margin-top: 80px;
+    min-height: calc(100vh - 160px);
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--cor-texto-secundario);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    nav ul {
+      gap: 1rem;
+    }
+  }
+</style>

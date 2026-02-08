@@ -1,0 +1,229 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const projetos = await getCollection('projetos');
+const projetosDestaque = projetos.filter(p => p.data.destaque);
+const todosOsProjetos = projetos.sort((a, b) => b.data.data.localeCompare(a.data.data));
+---
+
+<Layout title="Meu Portfólio">
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Olá, eu sou <span class="destaque">Seu Nome</span></h1>
+      <p>Desenvolvedor apaixonado por criar soluções web modernas e funcionais.</p>
+      <a href="#projetos" class="btn">Ver Projetos</a>
+    </div>
+  </section>
+
+  <!-- Projetos -->
+  <section id="projetos" class="projetos">
+    <div class="container">
+      <h2>Meus Projetos</h2>
+
+      <div class="grid-projetos">
+        {todosOsProjetos.map((projeto) => (
+          <a href={`/projetos/${projeto.slug}`} class="card-projeto">
+            <div class="card-imagem">
+              <img src={projeto.data.imagens[0]} alt={projeto.data.titulo} />
+              {projeto.data.destaque && <span class="badge">Destaque</span>}
+            </div>
+            <div class="card-conteudo">
+              <h3>{projeto.data.titulo}</h3>
+              <p>{projeto.data.descricao}</p>
+              <div class="stack">
+                {projeto.data.stack.map((tech) => (
+                  <span class="tech">{tech}</span>
+                ))}
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Sobre -->
+  <section id="sobre" class="sobre">
+    <div class="container">
+      <h2>Sobre Mim</h2>
+      <p>
+        Escreva aqui sobre você, sua trajetória, suas habilidades e o que te motiva
+        como desenvolvedor.
+      </p>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="contato">
+    <div class="container">
+      <h2>Contato</h2>
+      <p>Quer trabalhar comigo? Entre em contato!</p>
+      <div class="links-contato">
+        <a href="mailto:seu@email.com">Email</a>
+        <a href="https://github.com/seu-usuario" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/seu-usuario" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero .destaque {
+    color: var(--cor-primaria);
+  }
+
+  .hero p {
+    font-size: 1.25rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 2rem;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--cor-primaria);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+
+  .btn:hover {
+    background: var(--cor-secundaria);
+    color: white;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .grid-projetos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .card-projeto {
+    background: var(--cor-superficie);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    color: var(--cor-texto);
+  }
+
+  .card-projeto:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    color: var(--cor-texto);
+  }
+
+  .card-imagem {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .card-imagem img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .badge {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--cor-primaria);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  .card-conteudo {
+    padding: 1.5rem;
+  }
+
+  .card-conteudo h3 {
+    margin-bottom: 0.5rem;
+  }
+
+  .card-conteudo p {
+    color: var(--cor-texto-secundario);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tech {
+    background: rgba(99, 102, 241, 0.2);
+    color: var(--cor-secundaria);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+  }
+
+  .sobre, .contato {
+    background: var(--cor-superficie);
+  }
+
+  .sobre p, .contato p {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--cor-texto-secundario);
+  }
+
+  .links-contato {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .links-contato a {
+    background: var(--cor-fundo);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2rem;
+    }
+  }
+</style>
