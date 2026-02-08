@@ -5,6 +5,7 @@ import { getCollection } from 'astro:content';
 const projetos = await getCollection('projetos');
 const projetosDestaque = projetos.filter(p => p.data.destaque);
 const todosOsProjetos = projetos.sort((a, b) => b.data.data.localeCompare(a.data.data));
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title="Meu Portfólio">
@@ -27,9 +28,9 @@ const todosOsProjetos = projetos.sort((a, b) => b.data.data.localeCompare(a.data
 
       <div class="grid-projetos">
         {todosOsProjetos.map((projeto) => (
-          <a href={`/projetos/${projeto.slug}`} class="card-projeto">
+          <a href={`${base}projetos/${projeto.slug}`} class="card-projeto">
             <div class="card-imagem">
-              <img src={projeto.data.imagens[0]} alt={projeto.data.titulo} />
+              <img src={`${base}${projeto.data.imagens[0].replace(/^\//, '')}`} alt={projeto.data.titulo} />
               {projeto.data.destaque && <span class="badge">Destaque</span>}
             </div>
             <div class="card-conteudo">

@@ -12,12 +12,13 @@ export async function getStaticPaths() {
 
 const { projeto } = Astro.props;
 const { Content } = await projeto.render();
+const base = import.meta.env.BASE_URL;
 ---
 
 <Layout title={projeto.data.titulo}>
   <article class="projeto">
     <div class="container">
-      <a href="/" class="voltar">&larr; Voltar</a>
+      <a href={base} class="voltar">&larr; Voltar</a>
 
       <header class="projeto-header">
         <h1>{projeto.data.titulo}</h1>
@@ -47,7 +48,7 @@ const { Content } = await projeto.render();
 
       <div class="galeria">
         {projeto.data.imagens.map((img, i) => (
-          <img src={img} alt={`${projeto.data.titulo} - Imagem ${i + 1}`} />
+          <img src={`${base}${img.replace(/^\//, '')}`} alt={`${projeto.data.titulo} - Imagem ${i + 1}`} />
         ))}
       </div>
 
