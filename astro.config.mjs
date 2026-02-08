@@ -6,4 +6,5 @@ export default defineConfig({
   base: "/portfolio2026",
   integrations: [mdx()],
   output: "static",
+  trailingSlash: "always",
 });

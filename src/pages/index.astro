@@ -8,7 +8,7 @@ const todosOsProjetos = projetos.sort((a, b) => b.data.data.localeCompare(a.data
 const base = import.meta.env.BASE_URL;
 ---
 
-<Layout title="Meu Portfólio">
+<Layout title="Portfólio Vanthuir Maia">
   <!-- Hero -->
   <section class="hero">
     <div class="hero-container">
@@ -16,7 +16,7 @@ const base = import.meta.env.BASE_URL;
       <div class="hero-content">
         <h1>Olá, eu sou <span class="destaque">Vanthuir Maia</span></h1>
         <p>Software Engineer especializado em Backend Development com Python, Django e FastAPI.</p>
-        <a href="#projetos" class="btn">Ver Projetos</a>
+        <a href={`${base}#projetos`} class="btn">Ver Projetos</a>
       </div>
     </div>
   </section>
@@ -28,7 +28,7 @@ const base = import.meta.env.BASE_URL;
 
       <div class="grid-projetos">
         {todosOsProjetos.map((projeto) => (
-          <a href={`${base}projetos/${projeto.slug}`} class="card-projeto">
+          <a href={`${base}projetos/${projeto.slug}/`} class="card-projeto">
             <div class="card-imagem">
               <img src={`${base}${projeto.data.imagens[0].replace(/^\//, '')}`} alt={projeto.data.titulo} />
               {projeto.data.destaque && <span class="badge">Destaque</span>}
