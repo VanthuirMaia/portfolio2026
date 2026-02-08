@@ -10,10 +10,13 @@ const todosOsProjetos = projetos.sort((a, b) => b.data.data.localeCompare(a.data
 <Layout title="Meu Portfólio">
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-content">
-      <h1>Olá, eu sou <span class="destaque">Vanthuir Maia</span></h1>
-      <p>Software Engineer especializado em Backend Development com Python, Django e FastAPI.</p>
-      <a href="#projetos" class="btn">Ver Projetos</a>
+    <div class="hero-container">
+      <img src="/portfolio2026/foto.jpg" alt="Vanthuir Maia" class="foto-perfil" />
+      <div class="hero-content">
+        <h1>Olá, eu sou <span class="destaque">Vanthuir Maia</span></h1>
+        <p>Software Engineer especializado em Backend Development com Python, Django e FastAPI.</p>
+        <a href="#projetos" class="btn">Ver Projetos</a>
+      </div>
     </div>
   </section>
 
@@ -115,12 +118,31 @@ const todosOsProjetos = projetos.sort((a, b) => b.data.data.localeCompare(a.data
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
     padding: 2rem;
   }
 
+  .hero-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 900px;
+  }
+
+  .foto-perfil {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--cor-primaria);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+  }
+
+  .hero-content {
+    text-align: left;
+  }
+
   .hero h1 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
   }
 
@@ -334,6 +356,20 @@ const todosOsProjetos = projetos.sort((a, b) => b.data.data.localeCompare(a.data
   }
 
   @media (max-width: 768px) {
+    .hero-container {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hero-content {
+      text-align: center;
+    }
+
+    .foto-perfil {
+      width: 180px;
+      height: 180px;
+    }
+
     .hero h1 {
       font-size: 2rem;
     }
