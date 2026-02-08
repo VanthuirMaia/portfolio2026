@@ -1,14 +1,25 @@
-titulo: "Axio ERP Compras" descricao: "Sistema ERP completo para gestão de compras empresariais, desenvolvido para otimizar e automatizar processos de aquisição desde solicitações até aprovações finais. Inclui sistema de notificações em tempo real, controle de permissões hierárquico e geração automática de documentos PDF." stack:
-
-- Python 3.12 (Django 5.2)
-- Django REST Framework
-- Bootstrap 4 (AdminLTE 3)
-- JavaScript ES6
-- jQuery
-- SQLite
-- xhtml2pdf / WeasyPrint objetivo: "Modernizar e automatizar processos de compras empresariais, reduzindo processos manuais e proporcionando controle total sobre o ciclo de aquisições, desde solicitações até aprovações finais." imagens:
-- "/projetos/axio-erp/capa.jpg" link_projeto: "" link_repositorio: "[https://github.com/VanthuirMaia/ERP_Compras](https://github.com/VanthuirMaia/ERP_Compras)" data: "2024-08" destaque: true
-
+---
+titulo: "Axio ERP Compras"
+descricao: "Sistema ERP completo para gestão de compras empresariais, desenvolvido para otimizar e automatizar processos de aquisição."
+stack:
+  - Python 3.12
+  - Django 5.2
+  - Django REST Framework
+  - Bootstrap 4
+  - JavaScript ES6
+  - jQuery
+  - SQLite
+  - xhtml2pdf
+objetivo: "Modernizar e automatizar processos de compras empresariais, reduzindo processos manuais e proporcionando controle total sobre o ciclo de aquisições."
+imagens:
+  - "/projetos/axio-erp/capa.png"
+  - "/projetos/axio-erp/tela1.png"
+  - "/projetos/axio-erp/tela2.png"
+  - "/projetos/axio-erp/tela3.png"
+link_projeto: ""
+link_repositorio: "https://github.com/VanthuirMaia/ERP_Compras"
+data: "2024-08"
+destaque: true
 ---
 
 ## Sobre o Projeto
@@ -71,23 +82,19 @@ Desenvolvido com **Django 5.2** e **Python 3.12**, o sistema implementa uma arqu
 
 ### Desenvolvimento Full-Stack com Django
 
-Aprofundei conhecimentos em Django, desde a arquitetura MVT até recursos avançados como **Django Signals** para automação de processos, **Context Processors** para dados globais em templates, e sistema de permissões customizado usando **Django Groups**. A integração entre um backend robusto e frontend responsivo foi fundamental para criar uma experiência de usuário fluida.
+Aprofundei conhecimentos em Django, desde a arquitetura MVT até recursos avançados como **Django Signals** para automação de processos, **Context Processors** para dados globais em templates, e sistema de permissões customizado usando **Django Groups**.
 
 ### Geração de PDFs Complexos
 
-Implementei múltiplas bibliotecas de geração de PDF (**xhtml2pdf**, **WeasyPrint**, **ReportLab**) para criar documentos oficiais com formatação profissional. Aprendi a lidar com conversão de HTML/CSS para PDF, incluindo suporte a fontes customizadas, layouts complexos e elementos gráficos.
+Implementei múltiplas bibliotecas de geração de PDF (**xhtml2pdf**, **WeasyPrint**, **ReportLab**) para criar documentos oficiais com formatação profissional.
 
 ### Sistema de Notificações em Tempo Real
 
-Desenvolvi um sistema de notificações internas usando **Context Processors** do Django, permitindo que notificações sejam exibidas em tempo real em todas as páginas sem necessidade de polling ou WebSockets. Isso envolveu criar signals para detectar eventos (nova solicitação, mudança de status) e atualizar automaticamente o contador de notificações.
+Desenvolvi um sistema de notificações internas usando **Context Processors** do Django, permitindo que notificações sejam exibidas em tempo real em todas as páginas.
 
 ### Controle de Permissões Granular
 
-Criei um sistema de permissões hierárquico usando **Django Groups**, permitindo diferentes níveis de acesso (Solicitante, Compras, Gerência, Superusuário). Implementei validações tanto no backend (decorators e mixins) quanto no frontend (template tags), garantindo segurança em múltiplas camadas.
-
-### Modularização e Arquitetura Escalável
-
-Estruturei o projeto em **apps Django independentes** (core, solicitacoes, pedidos, cadastro), cada um com responsabilidades bem definidas. Isso facilita manutenção, testes e permite escalabilidade futura do sistema, além de seguir as melhores práticas de desenvolvimento Django.
+Criei um sistema de permissões hierárquico usando **Django Groups**, permitindo diferentes níveis de acesso (Solicitante, Compras, Gerência, Superusuário).
 
 ### Métricas do Projeto
 
@@ -95,4 +102,3 @@ Estruturei o projeto em **apps Django independentes** (core, solicitacoes, pedid
 - **4 apps customizados** modulares e independentes
 - **8+ modelos de dados** com relacionamentos complexos
 - **25+ templates** responsivos e reutilizáveis
-- **42 dependências** Python gerenciadas via pip
