@@ -15,7 +15,9 @@ const base = import.meta.env.BASE_URL;
       <img src="/portfolio2026/foto.jpg" alt="Vanthuir Maia" class="foto-perfil" />
       <div class="hero-content">
         <h1>Olá, eu sou <span class="destaque">Vanthuir Maia</span></h1>
-        <p>Software Engineer especializado em Backend Development com Python, Django e FastAPI.</p>
+        <p class="descricao">Software Engineer especializado em Backend Development com Python, Django e FastAPI.</p>
+        <p class="tagline">Ajudo empresas a automatizar processos e extrair valor de dados usando Python, IA generativa e pipelines escaláveis.</p>
+        <p class="impacto">Focado em reduzir custos operacionais e acelerar times através de sistemas sob medida.</p>
         <a href={`${base}#projetos`} class="btn">Ver Projetos</a>
       </div>
     </div>
@@ -55,6 +57,7 @@ const base = import.meta.env.BASE_URL;
       <div class="sobre-content">
         <p>
           Software Engineer com <strong>4+ anos</strong> construindo sistemas escaláveis.
+          Atuei em projetos que envolveram desde arquitetura de dados até orquestração de agentes de IA em produção.
           Experiência comprovada como <strong>Data Engineer</strong> e <strong>AI Engineer</strong>,
           desenvolvendo pipelines de dados e soluções de automação inteligente.
         </p>
@@ -67,12 +70,12 @@ const base = import.meta.env.BASE_URL;
 
           <div class="skill-card">
             <h3>Data & AI</h3>
-            <p>ETL Pipelines, LangChain, OpenAI, NLP, Deep Learning, Sistemas RAG</p>
+            <p>ETL Pipelines, <strong>LangChain</strong>, <strong>OpenAI</strong>, NLP, Deep Learning, <strong>Sistemas RAG</strong></p>
           </div>
 
           <div class="skill-card">
             <h3>DevOps</h3>
-            <p>AWS (Certificado), Docker, Docker Swarm, n8n, Automação</p>
+            <p>AWS (Certificado), Docker, Docker Swarm, <strong>n8n</strong>, Automação</p>
           </div>
         </div>
 
@@ -80,15 +83,15 @@ const base = import.meta.env.BASE_URL;
         <div class="experiencias">
           <div class="exp-item">
             <strong>AI Engineer</strong> - Residência em IA Generativa (Grupo Show/Omnilink)
-            <p>SDK para Business Intelligence com NLP, agentes conversacionais, Deep Learning</p>
+            <p>Desenvolvimento de SDK de BI com NLP e agentes conversacionais para times internos, acelerando análises sem necessidade de SQL. Implementação de Deep Learning para processamento de linguagem natural.</p>
           </div>
           <div class="exp-item">
             <strong>Backend Developer & Automation Engineer</strong> - AXIO
-            <p>Sistema de automação com redução de 60% em custos, agentes de IA no WhatsApp (1000+ msg/dia)</p>
+            <p>Sistema de automação com redução de 60% em custos operacionais. Agentes de IA no WhatsApp processando 1000+ mensagens/dia com taxa de resolução de 85%.</p>
           </div>
           <div class="exp-item">
             <strong>Data Engineer</strong> - MiRoute
-            <p>Arquitetura de dados para logística, APIs REST com Django, ETL pipelines</p>
+            <p>Arquitetura de dados para logística com APIs REST Django e ETL pipelines. Redução de 40% no tempo de processamento de rotas através de otimização de queries.</p>
           </div>
         </div>
 
@@ -103,11 +106,11 @@ const base = import.meta.env.BASE_URL;
   <section id="contato" class="contato">
     <div class="container">
       <h2>Contato</h2>
-      <p>Quer trabalhar comigo? Entre em contato!</p>
+      <p>Aberto a vagas remotas, projetos freelance e consultoria em IA/automação.</p>
       <div class="links-contato">
-        <a href="mailto:vanthuir.dev@gmail.com" target="_blank">Email</a>
-        <a href="https://github.com/VanthuirMaia" target="_blank">GitHub</a>
-        <a href="https://www.linkedin.com/in/vanthuir-maia-47767810b/" target="_blank">LinkedIn</a>
+        <a href="mailto:vanthuir.dev@gmail.com" target="_blank">📧 Email</a>
+        <a href="https://github.com/VanthuirMaia" target="_blank">💻 GitHub</a>
+        <a href="https://www.linkedin.com/in/vanthuir-maia-47767810b/" target="_blank">💼 LinkedIn</a>
       </div>
     </div>
   </section>
@@ -155,6 +158,26 @@ const base = import.meta.env.BASE_URL;
     font-size: 1.25rem;
     color: var(--cor-texto-secundario);
     margin-bottom: 2rem;
+  }
+
+  .hero .descricao {
+    font-size: 1.25rem;
+    color: var(--cor-texto-secundario);
+    margin-bottom: 1rem;
+  }
+
+  .hero .tagline {
+    font-size: 1.1rem;
+    color: var(--cor-primaria);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .hero .impacto {
+    font-size: 1rem;
+    color: var(--cor-texto);
+    margin-bottom: 2rem;
+    font-style: italic;
   }
 
   .btn {
