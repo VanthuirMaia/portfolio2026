@@ -1,0 +1,340 @@
+---
+titulo: "Axio Gestto - SaaS Multi-Tenant de Agendamentos"
+descricao: "Plataforma SaaS profissional de gestão de agendamentos para salões, barbearias e pequenos negócios, com calendário inteligente, PWA, integração com WhatsApp e sistema completo de pagamentos e assinaturas."
+stack:
+  - Python 3.10+
+  - Django 5.2
+  - Django REST Framework
+  - Celery + Redis
+  - PostgreSQL
+  - Nginx + Gunicorn
+  - Docker + Docker Compose
+  - FullCalendar.js
+  - WhiteNoise
+objetivo: "Criar uma plataforma SaaS escalável e profissional que automatiza a gestão de agendamentos para pequenos negócios brasileiros, integrando sistemas de pagamento (Stripe/Asaas), automação de workflow (n8n) e comunicação com clientes via WhatsApp, com arquitetura multi-tenant robusta."
+imagens:
+  - "/projetos/axio-gestto/capa.png"
+  - "/projetos/axio-gestto/calendario.png"
+  - "/projetos/axio-gestto/dashboard.png"
+  - "/projetos/axio-gestto/agendamentos.png"
+link_projeto: "https://www.gestto.app.br"
+link_repositorio: "https://github.com/VanthuirMaia/Axio_Gestto"
+data: "2025-12"
+destaque: true
+---
+
+## Sobre o Projeto
+
+**Axio Gestto** é uma plataforma SaaS multi-tenant profissional desenvolvida para resolver um problema real de pequenos negócios brasileiros: a complexidade e falta de automação na gestão de agendamentos. Integra calendário inteligente com FullCalendar, integrações automatizadas com WhatsApp e n8n, sistema completo de pagamentos e modelo de assinatura escalável.
+
+### O Problema Resolvido
+
+Salões, barbearias e pequenos negócios enfrentam desafios críticos:
+
+- Gestão manual de agendamentos causa conflitos, overbooking e perda de clientes
+- Impossibilidade de automação de notificações aos clientes
+- Falta de controle financeiro e comissões para profissionais
+- Sistemas existentes são caros, complexos e sem integração com WhatsApp
+- Necessidade de funcionamento em múltiplos dispositivos
+
+### A Solução Implementada
+
+Axio Gestto oferece uma plataforma completa que:
+
+- Gerencia agendamentos com calendário visual e prevenção automática de conflitos
+- Gera agendamentos recorrentes via Celery (60 dias adiante)
+- Integra-se com WhatsApp (Evolution API) e n8n para automações
+- Fornece PWA para funcionamento offline e em mobile
+- Controla clientes, serviços, profissionais e comissões
+- Implementa modelo multi-tenant com assinaturas e limites por plano
+- Integra Stripe e Asaas para pagamentos e cobrança
+
+## Impacto de Negócio
+
+### Para Salões, Barbearias e Pequenos Negócios
+
+- **Redução de conflitos**: Prevenção automática de overbooking
+- **Automação de notificações**: WhatsApp em tempo real aos clientes
+- **Controle financeiro**: Gestão de comissões e receita
+- **Acessibilidade**: PWA funciona em qualquer dispositivo
+- **Escalabilidade**: Modelo SaaS permite crescimento sem infraestrutura
+
+### Para Profissionais
+
+- **Transparência**: Visualização clara de agenda e comissões
+- **Autonomia**: Possibilidade de consultar agenda de qualquer lugar
+- **Precisão**: Histórico completo e confiável de atendimentos
+
+### Para Clientes Finais
+
+- **Conveniência**: Booking online 24/7 via Web/Mobile
+- **Notificações**: Lembretes automáticos via WhatsApp
+- **Confirmação**: Sistema automático de confirmação de agendamentos
+
+## Arquitetura Técnica
+
+### Stack Profissional
+
+| Componente | Tecnologia | Finalidade |
+|---|---|---|
+| Backend | Django 5.2 + DRF | API REST e lógica de negócio |
+| Task Queue | Celery + Redis | Agendamentos recorrentes e notificações |
+| Banco de Dados | PostgreSQL (prod) / SQLite (dev) | Persistência de dados |
+| Servidor Web | Nginx + Gunicorn | Servir aplicação em produção |
+| Containerização | Docker + Docker Compose | Ambientes consistentes |
+| Frontend | HTML/CSS/JS + FullCalendar | Interface responsiva |
+| PWA | Service Worker + Manifest | Funcionamento offline |
+
+### Estrutura de Aplicação
+
+**core/**: Autenticação customizada, onboarding, middlewares de assinatura/limites, health checks
+
+**Domínios Principais**:
+- `empresas/`: Gestão de tenants (multi-tenant)
+- `clientes/`: Registro e gestão de clientes
+- `agendamentos/`: Calendário, prevenção de conflitos, recorrências
+- `financeiro/`: Controle de receita e comissões
+
+**Recursos Avançados**:
+- `assinaturas/`: Planos, assinatura via Stripe/Asaas, webhooks
+- `configuracoes/`: Preferências de empresa, integrações, webhooks
+- `landing/`, `dashboard/`: UI e PWA
+
+## Funcionalidades Implementadas
+
+### Gestão de Agendamentos
+
+✅ Calendário FullCalendar com cores por profissional  
+✅ Prevenção automática de conflitos de agendamento  
+✅ Agendamentos recorrentes gerados via Celery (60 dias)  
+✅ Timezone configurável (America/Recife padrão)  
+✅ Logs de todas as operações com rastreamento completo  
+
+### Gestão de Negócio
+
+✅ Cadastro de clientes, serviços e profissionais  
+✅ Sistema de comissões por profissional  
+✅ Controle de limite de uso por plano  
+✅ Status de assinatura em middlewares  
+
+### Integrações
+
+✅ Webhooks com WhatsApp (Evolution API)  
+✅ Integração com n8n para automações  
+✅ APIs públicas para booking online  
+✅ Webhooks Stripe/Asaas para pagamentos  
+
+### PWA (Progressive Web App)
+
+✅ Manifest e Service Worker implementados  
+✅ Página offline funcional  
+✅ Static files via WhiteNoise  
+✅ Funcionamento completo em mobile  
+
+### Pagamentos
+
+✅ Integração Stripe completa  
+✅ Integração Asaas para pagamentos brasileiros  
+✅ Conformidade CDC (Código de Defesa do Consumidor)  
+✅ Trials sem cartão com notificações de expiração  
+✅ Automação de renovação de assinatura  
+
+## Roadmap Implementado
+
+| Feature | Status |
+|---|---|
+| Calendário com prevenção de conflitos | ✅ Prod |
+| Agendamentos recorrentes | ✅ Prod |
+| Multi-tenant com assinaturas | ✅ Prod |
+| Integração WhatsApp | ✅ Prod |
+| PWA e funcionamento offline | ✅ Prod |
+| Stripe/Asaas | ✅ Prod |
+| n8n webhooks | ✅ Prod |
+| Drag & drop no calendário | 🔄 Em desenvolvimento |
+| Bloqueio de folgas/ausências | 🔄 Em desenvolvimento |
+| Dashboard financeiro avançado | 🔄 Planejado |
+| API pública completa | 🔄 Planejado |
+
+## Aprendizados Técnicos
+
+Este projeto envolveu mastery em:
+
+1. **Arquitetura Multi-Tenant**: Isolamento de dados por empresa, middlewares de verificação, escalabilidade
+2. **Task Queue Distribuído**: Celery + Redis para recorrências e notificações em tempo real
+3. **Integrações de APIs**: Stripe, Asaas, Evolution (WhatsApp), n8n
+4. **PWA e Offline-First**: Service Workers, cache strategies, funcionamento sem internet
+5. **Calendário JavaScript**: FullCalendar com eventos dinâmicos e validações
+6. **Segurança em SaaS**: Autenticação customizada, HTTPS forçado, cookies seguros, ADMIN_URL customizável
+7. **DevOps e Deploy**: Docker Compose multi-container, migrations automáticas, health checks
+8. **Testes e CI/CD**: pytest, GitHub Actions, ambientes dev/prod
+
+## Métricas Técnicas
+
+### Arquitetura
+
+| Métrica | Valor |
+|---|---|
+| Linguagens | Python 40.3%, HTML 30.4%, JS 14.9%, CSS 12.6% |
+| Banco de Dados | PostgreSQL com migrations Django |
+| Cache | Redis para Celery e sessions |
+| Containers | 5 (web, db, redis, celery, nginx) |
+| Deploy | Docker Swarm + Traefik (opcional) |
+
+### Performance
+
+- Agendamentos recorrentes: Gerados em background via Celery
+- Calendário: Renderização otimizada com FullCalendar
+- PWA: Carregamento offline em < 1s
+- API: Rate limiting e throttling por tenant
+
+### Segurança
+
+- Multi-tenant: Filtro por `empresa` em todas as queries
+- HTTPS forçado em produção
+- HSTS habilitado
+- Cookies seguros com SameSite
+- Verificação de autenticação em middlewares
+
+## Variáveis de Ambiente Essenciais
+
+### Core Django
+SECRET_KEY=seu-secret-key-seguro
+DEBUG=False (produção)
+ALLOWED_HOSTS=seu-dominio.com
+SITE_URL=https://seu-dominio.com
+CORS_ALLOWED_ORIGINS=https://seu-dominio.com
+
+text
+
+### Banco de Dados
+DATABASE_URL=postgresql://user:pass@host:5432/db
+
+ou
+DB_ENGINE=django.db.backends.postgresql
+DB_NAME=gestto
+DB_USER=postgres
+DB_PASSWORD=senha
+DB_HOST=db
+DB_PORT=5432
+
+text
+
+### Redis e Celery
+REDIS_URL=redis://redis:6379/0
+CELERY_BROKER_URL=redis://redis:6379/0
+CELERY_RESULT_BACKEND=redis://redis:6379/0
+
+text
+
+### Email
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=smtp.brevo.com
+EMAIL_PORT=587
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER=seu-email@domain.com
+EMAIL_HOST_PASSWORD=sua-senha
+DEFAULT_FROM_EMAIL=noreply@domain.com
+
+text
+
+### Pagamentos
+STRIPE_PUBLIC_KEY=pk_live_...
+STRIPE_SECRET_KEY=sk_live_...
+STRIPE_WEBHOOK_SECRET=whsec_...
+ASAAS_API_KEY=sua-chave-asaas
+ASAAS_SANDBOX=False
+
+text
+
+### Integrações
+N8N_API_KEY=sua-chave-n8n
+N8N_WEBHOOK_URL=https://n8n.axiodev.cloud/webhook/gestto
+EVOLUTION_API_URL=https://evolution.axiodev.cloud
+EVOLUTION_API_KEY=sua-chave-evolution
+
+text
+
+## Como Executar
+
+### Localmente (Desenvolvimento)
+
+```bash
+# 1. Criar e ativar virtualenv
+python -m venv .venv
+.venv\Scripts\Activate  # Windows
+source .venv/bin/activate  # Linux/Mac
+
+# 2. Instalar dependências
+pip install -r requirements.txt
+
+# 3. Configurar .env (copiar de .env.example)
+cp .env.example .env
+
+# 4. Rodar migrações
+python manage.py migrate
+
+# 5. Criar superuser
+python manage.py createsuperuser
+
+# 6. Iniciar servidor
+python manage.py runserver
+# Acessar: http://localhost:8000
+Com Docker Compose (Produção)
+bash
+# 1. Subir containers
+docker-compose up -d
+
+# Sobe automaticamente:
+# - PostgreSQL
+# - Redis
+# - Django Web (Gunicorn)
+# - Celery Worker
+# - Nginx
+
+# 2. Verificar logs
+docker-compose logs -f web
+
+# 3. Executar comandos
+docker-compose exec web python manage.py createsuperuser
+Segurança e Operações
+Em Produção
+PostgreSQL + Redis obrigatório
+
+HTTPS forçado com HSTS
+
+Cookies seguros com SameSite=Lax
+
+ADMIN_URL customizável (não é /admin)
+
+Secrets em variáveis de ambiente
+
+Health check em /health/
+
+Multi-Tenant
+⚠️ Crítico: Filtrar sempre por empresa nas views/queries antes de expor APIs públicas
+
+Boas Práticas
+Nunca commitar .env em produção
+
+Revisar .env.example para variáveis necessárias
+
+Usar migrações do Django para schema changes
+
+Monitorar logs do Celery para falhas de background tasks
+
+Fazer backup diário do banco de dados
+
+Destaques do Projeto
+✨ Arquitetura Multi-Tenant Robusta: Isolamento completo de dados por empresa
+
+✨ Integrações Profissionais: Stripe, Asaas, WhatsApp, n8n
+
+✨ PWA com Offline: Funciona 100% offline quando necessário
+
+✨ Escalabilidade: Task queue distribuído com Celery
+
+✨ SaaS Completo: Assinaturas, trials, webhooks, pagamentos
+
+✨ Código Profissional: Migrations, testes, CI/CD, ambientes separados
+
+✨ Impacto Real: Solução para problema concreto de pequenos negócios
