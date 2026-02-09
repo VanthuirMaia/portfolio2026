@@ -71,7 +71,7 @@ const base = import.meta.env.BASE_URL;
 
 <style>
   .container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 2rem;
   }
@@ -83,30 +83,28 @@ const base = import.meta.env.BASE_URL;
     margin-bottom: 2rem;
     color: var(--cor-texto-secundario);
     font-size: 0.9rem;
-    transition: all 0.2s ease;
+    transition: color 0.2s;
   }
 
   .voltar:hover {
     color: var(--cor-primaria);
-    gap: 0.75rem;
   }
 
   .projeto-header {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
   }
 
   h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    line-height: 1.2;
-    word-wrap: break-word;
+    line-height: 1.3;
   }
 
   .objetivo {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--cor-texto-secundario);
     margin-bottom: 1.5rem;
-    line-height: 1.7;
+    line-height: 1.6;
   }
 
   .stack {
@@ -121,9 +119,8 @@ const base = import.meta.env.BASE_URL;
     color: var(--cor-secundaria);
     padding: 0.4rem 0.8rem;
     border-radius: 20px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 500;
-    white-space: nowrap;
   }
 
   .links {
@@ -139,15 +136,12 @@ const base = import.meta.env.BASE_URL;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     font-weight: 600;
-    transition: all 0.3s ease;
-    text-align: center;
+    transition: all 0.2s;
   }
 
   .btn:hover {
     background: var(--cor-secundaria);
-    color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
   }
 
   .btn-secundario {
@@ -162,30 +156,27 @@ const base = import.meta.env.BASE_URL;
   }
 
   .imagem-principal {
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem;
     border-radius: 12px;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
 
   .imagem-principal img {
     width: 100%;
     height: auto;
     display: block;
-    object-fit: cover;
   }
 
   .conteudo {
     background: var(--cor-superficie);
-    padding: 2.5rem;
+    padding: 2rem;
     border-radius: 12px;
-    margin-bottom: 2.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    margin-bottom: 3rem;
   }
 
   .conteudo :global(h2) {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     margin: 2rem 0 1rem;
     color: var(--cor-texto);
     padding-bottom: 0.5rem;
@@ -197,7 +188,7 @@ const base = import.meta.env.BASE_URL;
   }
 
   .conteudo :global(h3) {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     margin: 1.5rem 0 0.75rem;
     color: var(--cor-primaria);
   }
@@ -205,60 +196,53 @@ const base = import.meta.env.BASE_URL;
   .conteudo :global(p) {
     color: var(--cor-texto-secundario);
     margin-bottom: 1rem;
-    line-height: 1.8;
-    font-size: 0.95rem;
+    line-height: 1.7;
   }
 
   .conteudo :global(ul) {
     color: var(--cor-texto-secundario);
     margin-left: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
   }
 
   .conteudo :global(li) {
-    margin-bottom: 0.75rem;
-    line-height: 1.7;
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
   }
 
   .conteudo :global(strong) {
     color: var(--cor-texto);
-    font-weight: 600;
   }
 
   .galeria-section {
-    margin-top: 2.5rem;
+    margin-top: 3rem;
   }
 
   .galeria-section h2 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     margin-bottom: 1.5rem;
     color: var(--cor-texto);
   }
 
   .galeria {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
   }
 
   .galeria img {
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
+    transition: transform 0.2s;
   }
 
   .galeria img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-    border-color: var(--cor-primaria);
+    transform: scale(1.02);
   }
 
-  /* Responsividade - Tablet */
+  /* Tablet e Mobile */
   @media (max-width: 768px) {
     .container {
       padding: 1.5rem;
@@ -269,53 +253,19 @@ const base = import.meta.env.BASE_URL;
     }
 
     .objetivo {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .projeto-header {
-      margin-bottom: 2rem;
+      font-size: 1.1rem;
     }
 
     .conteudo {
-      padding: 2rem;
+      padding: 1.5rem;
     }
 
     .conteudo :global(h2) {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
     }
 
     .conteudo :global(h3) {
-      font-size: 1.05rem;
-    }
-
-    .galeria {
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .galeria-section h2 {
-      font-size: 1.4rem;
-    }
-  }
-
-  /* Responsividade - Tablet Pequeno */
-  @media (max-width: 600px) {
-    .container {
-      padding: 1.25rem;
-    }
-
-    h1 {
-      font-size: 1.75rem;
-    }
-
-    .links {
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .btn {
-      width: 100%;
+      font-size: 1.1rem;
     }
 
     .galeria {
@@ -323,30 +273,23 @@ const base = import.meta.env.BASE_URL;
       gap: 1rem;
     }
 
-    .imagem-principal {
-      margin-bottom: 2rem;
-    }
-
-    .conteudo {
-      padding: 1.5rem;
-      margin-bottom: 2rem;
+    .galeria-section h2 {
+      font-size: 1.5rem;
     }
   }
 
-  /* Responsividade - Mobile */
+  /* Mobile */
   @media (max-width: 480px) {
     .container {
       padding: 1rem;
     }
 
     h1 {
-      font-size: 1.5rem;
-      margin-bottom: 0.75rem;
+      font-size: 1.75rem;
     }
 
     .objetivo {
-      font-size: 0.95rem;
-      margin-bottom: 1.25rem;
+      font-size: 1rem;
     }
 
     .tech {
@@ -354,83 +297,29 @@ const base = import.meta.env.BASE_URL;
       padding: 0.3rem 0.6rem;
     }
 
+    .links {
+      flex-direction: column;
+    }
+
     .btn {
-      padding: 0.65rem 1.25rem;
-      font-size: 0.9rem;
-    }
-
-    .imagem-principal {
-      margin-bottom: 1.5rem;
-    }
-
-    .imagem-principal img {
-      max-height: 250px;
-      object-fit: contain;
-      background: rgba(0, 0, 0, 0.2);
+      width: 100%;
+      text-align: center;
     }
 
     .conteudo {
       padding: 1.25rem;
-      margin-bottom: 1.5rem;
     }
 
     .conteudo :global(h2) {
-      font-size: 1.2rem;
-      margin: 1.5rem 0 0.75rem;
+      font-size: 1.3rem;
     }
 
     .conteudo :global(h3) {
       font-size: 1rem;
-      margin: 1.25rem 0 0.5rem;
-    }
-
-    .conteudo :global(p) {
-      font-size: 0.9rem;
-      line-height: 1.7;
-    }
-
-    .conteudo :global(ul) {
-      margin-left: 1.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .conteudo :global(li) {
-      margin-bottom: 0.5rem;
-      font-size: 0.9rem;
-    }
-
-    .galeria-section {
-      margin-top: 2rem;
     }
 
     .galeria-section h2 {
-      font-size: 1.25rem;
-      margin-bottom: 1rem;
-    }
-
-    .voltar {
-      font-size: 0.85rem;
-      margin-bottom: 1.5rem;
-    }
-  }
-
-  /* Responsividade - Mobile Muito Pequeno */
-  @media (max-width: 360px) {
-    .container {
-      padding: 0.75rem;
-    }
-
-    h1 {
-      font-size: 1.35rem;
-    }
-
-    .tech {
-      font-size: 0.7rem;
-      padding: 0.25rem 0.5rem;
-    }
-
-    .conteudo {
-      padding: 1rem;
+      font-size: 1.3rem;
     }
   }
 </style>
