@@ -127,8 +127,33 @@ const base = import.meta.env.BASE_URL;
   }
 
   @media (max-width: 768px) {
+    header {
+      padding: 1rem 1.5rem;
+    }
+
     nav ul {
       gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .logo {
+      font-size: 1.3rem;
     }
   }
+
+  @media (max-width: 480px) {
+    header {
+      padding: 0.75rem 1rem;
+    }
+
+    nav ul {
+      gap: 0.75rem;
+      font-size: 0.85rem;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+    }
+  }
+
 </style>

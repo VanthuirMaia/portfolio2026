@@ -357,13 +357,50 @@ const base = import.meta.env.BASE_URL;
   }
 
   @media (max-width: 768px) {
+    .hero {
+      padding: 1.5rem;
+    }
+
     .hero-container {
       flex-direction: column;
       text-align: center;
+      gap: 2rem;
     }
 
     .hero-content {
       text-align: center;
+    }
+
+    .foto-perfil {
+      width: 200px;
+      height: 200px;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+    }
+
+    .container {
+      padding: 3rem 1.5rem;
+    }
+
+    .grid-projetos {
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero {
+      padding: 1rem;
     }
 
     .foto-perfil {
@@ -372,7 +409,90 @@ const base = import.meta.env.BASE_URL;
     }
 
     .hero h1 {
-      font-size: 2rem;
+      font-size: 1.75rem;
+    }
+
+    .hero p {
+      font-size: 1rem;
+    }
+
+    .container {
+      padding: 2.5rem 1.25rem;
+    }
+
+    .grid-projetos {
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+
+    .links-contato {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .links-contato a {
+      width: 100%;
+      text-align: center;
     }
   }
+
+  @media (max-width: 480px) {
+    .hero {
+      min-height: calc(100vh - 100px);
+      padding: 1rem;
+    }
+
+    .hero-container {
+      gap: 1.5rem;
+    }
+
+    .foto-perfil {
+      width: 150px;
+      height: 150px;
+    }
+
+    .hero h1 {
+      font-size: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      padding: 0.65rem 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    .container {
+      padding: 2rem 1rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-conteudo h3 {
+      font-size: 1.1rem;
+    }
+
+    .sobre-content > p {
+      font-size: 1rem;
+    }
+
+    .exp-item {
+      padding: 0.75rem 1rem;
+    }
+
+    .exp-item strong {
+      font-size: 0.95rem;
+    }
+
+    .exp-item p {
+      font-size: 0.85rem;
+    }
+  }
+
 </style>

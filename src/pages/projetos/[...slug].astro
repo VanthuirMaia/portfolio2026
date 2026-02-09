@@ -18,43 +18,53 @@ const base = import.meta.env.BASE_URL;
 <Layout title={projeto.data.titulo}>
   <article class="projeto">
     <div class="container">
-      <a href={base} class="voltar">&larr; Voltar</a>
+      <a href={base} class="voltar">&larr; Voltar para Home</a>
 
       <header class="projeto-header">
         <h1>{projeto.data.titulo}</h1>
         <p class="objetivo">{projeto.data.objetivo}</p>
 
-        <div class="meta">
-          <div class="stack">
-            {projeto.data.stack.map((tech) => (
-              <span class="tech">{tech}</span>
-            ))}
-          </div>
+        <div class="stack">
+          {projeto.data.stack.map((tech) => (
+            <span class="tech">{tech}</span>
+          ))}
+        </div>
 
-          <div class="links">
-            {projeto.data.link_projeto && (
-              <a href={projeto.data.link_projeto} target="_blank" class="btn">
-                Ver Projeto
-              </a>
-            )}
-            {projeto.data.link_repositorio && (
-              <a href={projeto.data.link_repositorio} target="_blank" class="btn btn-secundario">
-                Repositório
-              </a>
-            )}
-          </div>
+        <div class="links">
+          {projeto.data.link_projeto && projeto.data.link_projeto.length > 0 && (
+            <a href={projeto.data.link_projeto} target="_blank" class="btn">
+              Ver Projeto
+            </a>
+          )}
+          {projeto.data.link_repositorio && projeto.data.link_repositorio.length > 0 && (
+            <a href={projeto.data.link_repositorio} target="_blank" class="btn btn-secundario">
+              Repositório
+            </a>
+          )}
         </div>
       </header>
 
-      <div class="galeria">
-        {projeto.data.imagens.map((img, i) => (
-          <img src={`${base}${img.replace(/^\//, '')}`} alt={`${projeto.data.titulo} - Imagem ${i + 1}`} />
-        ))}
+      <!-- Imagem principal -->
+      <div class="imagem-principal">
+        <img src={`${base}${projeto.data.imagens[0].replace(/^\//, '')}`} alt={projeto.data.titulo} />
       </div>
 
+      <!-- Conteúdo do projeto -->
       <div class="conteudo">
         <Content />
       </div>
+
+      <!-- Galeria de imagens -->
+      {projeto.data.imagens.length > 1 && (
+        <div class="galeria-section">
+          <h2>Screenshots</h2>
+          <div class="galeria">
+            {projeto.data.imagens.slice(1).map((img, i) => (
+              <img src={`${base}${img.replace(/^\//, '')}`} alt={`${projeto.data.titulo} - Imagem ${i + 2}`} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   </article>
 </Layout>
@@ -67,54 +77,58 @@ const base = import.meta.env.BASE_URL;
   }
 
   .voltar {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     margin-bottom: 2rem;
     color: var(--cor-texto-secundario);
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
   }
 
   .voltar:hover {
-    color: var(--cor-texto);
+    color: var(--cor-primaria);
+    gap: 0.75rem;
   }
 
   .projeto-header {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
   h1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
+    line-height: 1.2;
+    word-wrap: break-word;
   }
 
   .objetivo {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     color: var(--cor-texto-secundario);
-    margin-bottom: 2rem;
-  }
-
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
   }
 
   .stack {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 
   .tech {
     background: rgba(99, 102, 241, 0.2);
     color: var(--cor-secundaria);
-    padding: 0.5rem 1rem;
+    padding: 0.4rem 0.8rem;
     border-radius: 20px;
-    font-size: 0.875rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    white-space: nowrap;
   }
 
   .links {
     display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
   }
 
@@ -125,17 +139,20 @@ const base = import.meta.env.BASE_URL;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     font-weight: 600;
-    transition: background 0.2s;
+    transition: all 0.3s ease;
+    text-align: center;
   }
 
   .btn:hover {
     background: var(--cor-secundaria);
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
   }
 
   .btn-secundario {
-    background: var(--cor-superficie);
-    border: 1px solid var(--cor-primaria);
+    background: transparent;
+    border: 2px solid var(--cor-primaria);
     color: var(--cor-primaria);
   }
 
@@ -144,28 +161,35 @@ const base = import.meta.env.BASE_URL;
     color: white;
   }
 
-  .galeria {
-    display: grid;
-    gap: 1rem;
-    margin-bottom: 3rem;
+  .imagem-principal {
+    margin-bottom: 2.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   }
 
-  .galeria img {
+  .imagem-principal img {
     width: 100%;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: auto;
+    display: block;
+    object-fit: cover;
   }
 
   .conteudo {
     background: var(--cor-superficie);
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 12px;
+    margin-bottom: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .conteudo :global(h2) {
     font-size: 1.5rem;
     margin: 2rem 0 1rem;
     color: var(--cor-texto);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   .conteudo :global(h2:first-child) {
@@ -173,34 +197,240 @@ const base = import.meta.env.BASE_URL;
   }
 
   .conteudo :global(h3) {
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     margin: 1.5rem 0 0.75rem;
-    color: var(--cor-texto);
+    color: var(--cor-primaria);
   }
 
   .conteudo :global(p) {
     color: var(--cor-texto-secundario);
     margin-bottom: 1rem;
+    line-height: 1.8;
+    font-size: 0.95rem;
   }
 
   .conteudo :global(ul) {
     color: var(--cor-texto-secundario);
     margin-left: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
 
   .conteudo :global(li) {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.7;
   }
 
+  .conteudo :global(strong) {
+    color: var(--cor-texto);
+    font-weight: 600;
+  }
+
+  .galeria-section {
+    margin-top: 2.5rem;
+  }
+
+  .galeria-section h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: var(--cor-texto);
+  }
+
+  .galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .galeria img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+
+  .galeria img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-color: var(--cor-primaria);
+  }
+
+  /* Responsividade - Tablet */
   @media (max-width: 768px) {
+    .container {
+      padding: 1.5rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .objetivo {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .projeto-header {
+      margin-bottom: 2rem;
+    }
+
+    .conteudo {
+      padding: 2rem;
+    }
+
+    .conteudo :global(h2) {
+      font-size: 1.3rem;
+    }
+
+    .conteudo :global(h3) {
+      font-size: 1.05rem;
+    }
+
+    .galeria {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .galeria-section h2 {
+      font-size: 1.4rem;
+    }
+  }
+
+  /* Responsividade - Tablet Pequeno */
+  @media (max-width: 600px) {
+    .container {
+      padding: 1.25rem;
+    }
+
     h1 {
       font-size: 1.75rem;
     }
 
-    .meta {
+    .links {
       flex-direction: column;
-      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .btn {
+      width: 100%;
+    }
+
+    .galeria {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .imagem-principal {
+      margin-bottom: 2rem;
+    }
+
+    .conteudo {
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  /* Responsividade - Mobile */
+  @media (max-width: 480px) {
+    .container {
+      padding: 1rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .objetivo {
+      font-size: 0.95rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .tech {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+    }
+
+    .btn {
+      padding: 0.65rem 1.25rem;
+      font-size: 0.9rem;
+    }
+
+    .imagem-principal {
+      margin-bottom: 1.5rem;
+    }
+
+    .imagem-principal img {
+      max-height: 250px;
+      object-fit: contain;
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .conteudo {
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .conteudo :global(h2) {
+      font-size: 1.2rem;
+      margin: 1.5rem 0 0.75rem;
+    }
+
+    .conteudo :global(h3) {
+      font-size: 1rem;
+      margin: 1.25rem 0 0.5rem;
+    }
+
+    .conteudo :global(p) {
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
+    .conteudo :global(ul) {
+      margin-left: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .conteudo :global(li) {
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .galeria-section {
+      margin-top: 2rem;
+    }
+
+    .galeria-section h2 {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .voltar {
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  /* Responsividade - Mobile Muito Pequeno */
+  @media (max-width: 360px) {
+    .container {
+      padding: 0.75rem;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+    }
+
+    .tech {
+      font-size: 0.7rem;
+      padding: 0.25rem 0.5rem;
+    }
+
+    .conteudo {
+      padding: 1rem;
     }
   }
 </style>
