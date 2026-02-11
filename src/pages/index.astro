@@ -3,44 +3,88 @@ import Layout from '../layouts/Layout.astro';
 import { getCollection } from 'astro:content';
 
 const projetos = await getCollection('projetos');
-const projetosDestaque = projetos.filter(p => p.data.destaque);
 const todosOsProjetos = projetos.sort((a, b) => b.data.data.localeCompare(a.data.data));
 const base = import.meta.env.BASE_URL;
 ---
 
-<Layout title="Portfólio Vanthuir Maia">
-  <!-- Hero -->
+<Layout title="Vanthuir Maia | AI Engineer & Data Specialist">
+  <!-- Hero with Neural Network Canvas -->
   <section class="hero">
-    <div class="hero-container">
-      <img src="/portfolio2026/foto.jpg" alt="Vanthuir Maia" class="foto-perfil" />
-      <div class="hero-content">
-        <h1>Olá, eu sou <span class="destaque">Vanthuir Maia</span></h1>
-        <p class="descricao">AI Engineer & Data Specialist focado em IA Generativa, RAG, LangChain e Pipelines de Dados.</p>
-        <p class="tagline">Transformo dados em valor de negócio usando IA Generativa, Sistemas RAG e Automação Inteligente com n8n e Python.</p>
-        <p class="impacto">Especializado em reduzir custos operacionais e acelerar decisões através de agentes de IA e pipelines escaláveis.</p>
-        <a href={`${base}#projetos`} class="btn">Ver Projetos</a>
+    <canvas id="neural-canvas" aria-hidden="true"></canvas>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-greeting reveal">Olá, eu sou</p>
+      <h1 class="hero-name reveal" style="--delay: 0.1s">Vanthuir Maia</h1>
+      <p class="hero-title reveal" style="--delay: 0.2s">AI Engineer & Data Specialist</p>
+      <p class="hero-tagline reveal" style="--delay: 0.3s">
+        Transformo dados em valor de negócio com IA Generativa,
+        Sistemas RAG e Automação Inteligente.
+      </p>
+      <div class="hero-cta reveal" style="--delay: 0.4s">
+        <a href={`${base}#projetos`} class="btn-primary">
+          <span>Ver Projetos</span>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href={`${base}#contato`} class="btn-outline">Contato</a>
+      </div>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- Metrics Bar -->
+  <section class="metrics">
+    <div class="metrics-container">
+      <div class="metric-item reveal" style="--delay: 0s">
+        <span class="metric-value" data-target="4" data-suffix="+">0+</span>
+        <span class="metric-label">Anos de Experiência</span>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item reveal" style="--delay: 0.1s">
+        <span class="metric-value" data-target="60" data-suffix="%">0%</span>
+        <span class="metric-label">Redução de Custos</span>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item reveal" style="--delay: 0.2s">
+        <span class="metric-value" data-target="1000" data-suffix="+">0+</span>
+        <span class="metric-label">Msgs/dia Processadas</span>
+      </div>
+      <div class="metric-divider"></div>
+      <div class="metric-item reveal" style="--delay: 0.3s">
+        <span class="metric-value" data-target="85" data-suffix="%">0%</span>
+        <span class="metric-label">Taxa de Resolução</span>
       </div>
     </div>
   </section>
 
-  <!-- Projetos -->
+  <!-- Projetos - Data Grid -->
   <section id="projetos" class="projetos">
     <div class="container">
-      <h2>Meus Projetos</h2>
+      <div class="section-header reveal">
+        <span class="section-tag">// projetos</span>
+        <h2>Trabalhos Recentes</h2>
+        <p class="section-desc">Soluções de IA e Data Engineering em produção</p>
+      </div>
 
       <div class="grid-projetos">
-        {todosOsProjetos.map((projeto) => (
-          <a href={`${base}projetos/${projeto.slug}/`} class="card-projeto">
+        {todosOsProjetos.map((projeto, i) => (
+          <a href={`${base}projetos/${projeto.slug}/`} class="card-projeto reveal" style={`--delay: ${i * 0.1}s`}>
+            <div class="card-border"></div>
             <div class="card-imagem">
-              <img src={`${base}${projeto.data.imagens[0].replace(/^\//, '')}`} alt={projeto.data.titulo} />
+              <img src={`${base}${projeto.data.imagens[0].replace(/^\//, '')}`} alt={projeto.data.titulo} loading="lazy" />
+              <div class="card-scan"></div>
               {projeto.data.destaque && <span class="badge">Destaque</span>}
             </div>
             <div class="card-conteudo">
               <h3>{projeto.data.titulo}</h3>
               <p>{projeto.data.descricao}</p>
               <div class="stack">
-                {projeto.data.stack.map((tech) => (
-                  <span class="tech">{tech}</span>
+                {projeto.data.stack.map((tech: string) => (
+                  <span class="tech">
+                    <span class="tech-dot"></span>
+                    {tech}
+                  </span>
                 ))}
               </div>
             </div>
@@ -50,52 +94,96 @@ const base = import.meta.env.BASE_URL;
     </div>
   </section>
 
-  <!-- Sobre -->
+  <!-- Sobre - Tech Constellation + Timeline -->
   <section id="sobre" class="sobre">
     <div class="container">
-      <h2>Sobre Mim</h2>
+      <div class="section-header reveal">
+        <span class="section-tag">// sobre</span>
+        <h2>Sobre Mim</h2>
+      </div>
+
       <div class="sobre-content">
-        <p>
+        <p class="sobre-bio reveal">
           Software Engineer com <strong>4+ anos</strong> construindo sistemas escaláveis.
           Atuei em projetos que envolveram desde arquitetura de dados até orquestração de agentes de IA e fluxos no n8n em produção.
           Experiência comprovada como <strong>Data Engineer</strong> e <strong>AI Engineer</strong>,
           desenvolvendo pipelines de dados e soluções de automação inteligente.
         </p>
 
-        <div class="skills-grid">
-          <div class="skill-card">
-            <h3>Backend & APIs</h3>
-            <p>Python, Django, FastAPI, APIs RESTful, PostgreSQL, Redis, Microservices</p>
+        <!-- Skills Constellation -->
+        <div class="skills-constellation reveal" style="--delay: 0.1s">
+          <div class="constellation-category">
+            <h3 class="constellation-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><path d="M8 16l-2-2 2-2"/><path d="M16 16l2-2-2-2"/><path d="M12 12v8"/></svg>
+              Backend & APIs
+            </h3>
+            <div class="node-grid">
+              {["Python", "Django", "FastAPI", "PostgreSQL", "Redis", "REST APIs", "Microservices"].map(t => (
+                <span class="node">{t}</span>
+              ))}
+            </div>
           </div>
-
-          <div class="skill-card">
-            <h3>Data & AI</h3>
-            <p>ETL Pipelines, <strong>LangChain</strong>, <strong>OpenAI</strong>, NLP, Deep Learning, <strong>Sistemas RAG</strong></p>
+          <div class="constellation-category">
+            <h3 class="constellation-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+              Data & AI
+            </h3>
+            <div class="node-grid">
+              {["LangChain", "OpenAI", "RAG Systems", "NLP", "Deep Learning", "ETL Pipelines", "Data Modeling"].map(t => (
+                <span class="node">{t}</span>
+              ))}
+            </div>
           </div>
-
-          <div class="skill-card">
-            <h3>DevOps</h3>
-            <p>AWS (Certificado), Docker, Docker Swarm, <strong>n8n</strong>, Automação</p>
+          <div class="constellation-category">
+            <h3 class="constellation-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+              DevOps & Infra
+            </h3>
+            <div class="node-grid">
+              {["AWS", "Docker", "Docker Swarm", "n8n", "CI/CD", "Linux", "Automação"].map(t => (
+                <span class="node">{t}</span>
+              ))}
+            </div>
           </div>
         </div>
 
-        <h3 class="experiencias-titulo">Experiências Recentes</h3>
-        <div class="experiencias">
-          <div class="exp-item">
-            <strong>AI Engineer</strong> - Residência em IA Generativa (Grupo Show/Omnilink)
-            <p>Desenvolvimento de SDK de BI com NLP e agentes conversacionais para times internos, acelerando análises sem necessidade de SQL. Implementação de Deep Learning para processamento de linguagem natural.</p>
-          </div>
-          <div class="exp-item">
-            <strong>Backend Developer & Automation Engineer</strong> - AXIO
-            <p>Sistema de automação com redução de 60% em custos operacionais. Agentes de IA no WhatsApp processando 1000+ mensagens/dia com taxa de resolução de 85%.</p>
-          </div>
-          <div class="exp-item">
-            <strong>Data Engineer</strong> - MiRoute
-            <p>Arquitetura de dados para logística com APIs REST Django e ETL pipelines. Redução de 40% no tempo de processamento de rotas através de otimização de queries.</p>
+        <!-- Experience Timeline -->
+        <div class="timeline-section">
+          <h3 class="timeline-heading reveal">Experiência</h3>
+          <div class="timeline">
+            <div class="timeline-line" aria-hidden="true"></div>
+
+            <div class="timeline-item reveal" style="--delay: 0.1s">
+              <div class="timeline-node" aria-hidden="true"></div>
+              <div class="timeline-card">
+                <span class="timeline-role">AI Engineer</span>
+                <span class="timeline-company">Residência em IA Generativa (Grupo Show/Omnilink)</span>
+                <p>Desenvolvimento de SDK de BI com NLP e agentes conversacionais para times internos, acelerando análises sem necessidade de SQL. Implementação de Deep Learning para processamento de linguagem natural.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item reveal" style="--delay: 0.2s">
+              <div class="timeline-node" aria-hidden="true"></div>
+              <div class="timeline-card">
+                <span class="timeline-role">Backend Developer & Automation Engineer</span>
+                <span class="timeline-company">AXIO</span>
+                <p>Sistema de automação com redução de 60% em custos operacionais. Agentes de IA no WhatsApp processando 1000+ mensagens/dia com taxa de resolução de 85%.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item reveal" style="--delay: 0.3s">
+              <div class="timeline-node" aria-hidden="true"></div>
+              <div class="timeline-card">
+                <span class="timeline-role">Data Engineer</span>
+                <span class="timeline-company">MiRoute</span>
+                <p>Arquitetura de dados para logística com APIs REST Django e ETL pipelines. Redução de 40% no tempo de processamento de rotas através de otimização de queries.</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <p class="formacao">
+        <p class="formacao reveal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 1.66 2.69 3 6 3s6-1.34 6-3v-5"/></svg>
           <strong>Formação:</strong> Mestrado em Engenharia de Computação
         </p>
       </div>
@@ -105,126 +193,475 @@ const base = import.meta.env.BASE_URL;
   <!-- Contato -->
   <section id="contato" class="contato">
     <div class="container">
-      <h2>Contato</h2>
-      <p>Aberto a vagas remotas, projetos freelance e consultoria em IA/automação.</p>
-      <div class="links-contato">
-        <a href="mailto:vanthuir.dev@gmail.com" target="_blank">📧 Email</a>
-        <a href="https://github.com/VanthuirMaia" target="_blank">💻 GitHub</a>
-        <a href="https://www.linkedin.com/in/vanthuir-maia-47767810b/" target="_blank">💼 LinkedIn</a>
+      <div class="contato-content reveal">
+        <span class="section-tag">// contato</span>
+        <h2>Vamos construir algo extraordinário?</h2>
+        <p>Aberto a vagas remotas, projetos freelance e consultoria em IA/automação.</p>
+        <div class="links-contato">
+          <a href="mailto:vanthuir.dev@gmail.com" target="_blank" class="contato-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 8L2 4"/></svg>
+            <span>Email</span>
+          </a>
+          <a href="https://github.com/VanthuirMaia" target="_blank" class="contato-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/vanthuir-maia-47767810b/" target="_blank" class="contato-link">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            <span>LinkedIn</span>
+          </a>
+        </div>
       </div>
     </div>
+    <div class="grid-bg" aria-hidden="true"></div>
   </section>
 </Layout>
 
+<!-- Neural Network Canvas Script -->
+<script>
+  const canvas = document.getElementById('neural-canvas') as HTMLCanvasElement;
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const isMobile = window.innerWidth < 768;
+    const PARTICLE_COUNT = isMobile ? 40 : 80;
+    const CONNECTION_DISTANCE = isMobile ? 120 : 180;
+    let mouseX = -1000, mouseY = -1000;
+    let animationId: number;
+
+    interface Particle {
+      x: number; y: number; vx: number; vy: number; size: number; hue: number;
+    }
+
+    const particles: Particle[] = [];
+
+    function resize() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function init() {
+      resize();
+      particles.length = 0;
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          size: Math.random() * 2 + 1,
+          hue: Math.random() * 80 + 170, // 170-250: cyan to purple
+        });
+      }
+    }
+
+    function animate() {
+      if (!ctx) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Update & draw particles
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        // Mouse interaction
+        const dx = mouseX - p.x;
+        const dy = mouseY - p.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 200 && dist > 0) {
+          const force = (200 - dist) / 200 * 0.02;
+          p.vx -= (dx / dist) * force;
+          p.vy -= (dy / dist) * force;
+        }
+
+        // Brownian motion
+        p.vx += (Math.random() - 0.5) * 0.02;
+        p.vy += (Math.random() - 0.5) * 0.02;
+
+        // Damping
+        p.vx *= 0.99;
+        p.vy *= 0.99;
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Wrap around
+        if (p.x < 0) p.x = canvas.width;
+        if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        if (p.y > canvas.height) p.y = 0;
+
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${p.hue}, 80%, 65%, 0.8)`;
+        ctx.fill();
+
+        // Draw connections
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const cdx = p.x - p2.x;
+          const cdy = p.y - p2.y;
+          const cdist = Math.sqrt(cdx * cdx + cdy * cdy);
+
+          if (cdist < CONNECTION_DISTANCE) {
+            const opacity = (1 - cdist / CONNECTION_DISTANCE) * 0.25;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.strokeStyle = `hsla(${(p.hue + p2.hue) / 2}, 70%, 55%, ${opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      animationId = requestAnimationFrame(animate);
+    }
+
+    // Mouse tracking for canvas
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
+
+    document.addEventListener('mouseleave', () => {
+      mouseX = -1000;
+      mouseY = -1000;
+    });
+
+    // Visibility API - pause when hidden
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animationId);
+      } else if (!prefersReduced) {
+        animate();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      resize();
+    });
+
+    init();
+
+    if (prefersReduced) {
+      // Draw static frame
+      if (ctx) {
+        for (const p of particles) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = `hsla(${p.hue}, 80%, 65%, 0.5)`;
+          ctx.fill();
+        }
+      }
+    } else {
+      animate();
+    }
+  }
+
+  // Count-up animation for metrics
+  const metricValues = document.querySelectorAll('.metric-value');
+  const metricsObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const el = entry.target as HTMLElement;
+        const target = parseInt(el.dataset.target || '0');
+        const suffix = el.dataset.suffix || '';
+        const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (prefersReduced) {
+          el.textContent = target + suffix;
+        } else {
+          let current = 0;
+          const duration = 1500;
+          const step = target / (duration / 16);
+          const counter = () => {
+            current += step;
+            if (current >= target) {
+              el.textContent = target + suffix;
+            } else {
+              el.textContent = Math.floor(current) + suffix;
+              requestAnimationFrame(counter);
+            }
+          };
+          counter();
+        }
+        metricsObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  metricValues.forEach(el => metricsObserver.observe(el));
+</script>
+
 <style>
+  /* ===== HERO ===== */
   .hero {
-    min-height: calc(100vh - 80px);
+    position: relative;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    overflow: hidden;
   }
 
-  .hero-container {
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    max-width: 900px;
+  #neural-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
   }
 
-  .foto-perfil {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--cor-primaria);
-    box-shadow: 0 0 30px rgba(99, 102, 241, 0.3);
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 0%, var(--cor-fundo) 75%);
+    z-index: 2;
   }
 
   .hero-content {
-    text-align: left;
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
   }
 
-  .hero h1 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero .destaque {
-    color: var(--cor-primaria);
-  }
-
-  .hero p {
-    font-size: 1.25rem;
-    color: var(--cor-texto-secundario);
-    margin-bottom: 2rem;
-  }
-
-  .hero .descricao {
-    font-size: 1.25rem;
-    color: var(--cor-texto-secundario);
-    margin-bottom: 1rem;
-  }
-
-  .hero .tagline {
-    font-size: 1.1rem;
+  .hero-greeting {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
     color: var(--cor-primaria);
     margin-bottom: 0.75rem;
-    font-weight: 500;
+    letter-spacing: 1px;
   }
 
-  .hero .impacto {
-    font-size: 1rem;
-    color: var(--cor-texto);
-    margin-bottom: 2rem;
-    font-style: italic;
+  .hero-name {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    letter-spacing: -1px;
   }
 
-  .btn {
-    display: inline-block;
-    background: var(--cor-primaria);
+  .hero-title {
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: var(--cor-texto-secundario);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .hero-tagline {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--cor-texto-secundario);
+    max-width: 550px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gradient-main);
     color: white;
-    padding: 0.75rem 2rem;
+    padding: 0.85rem 2rem;
     border-radius: 8px;
     font-weight: 600;
-    transition: background 0.2s;
+    font-size: 0.95rem;
+    transition: transform 0.3s, box-shadow 0.3s;
   }
 
-  .btn:hover {
-    background: var(--cor-secundaria);
+  .btn-primary:hover {
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(6, 182, 212, 0.3);
+  }
+
+  .btn-primary svg {
+    transition: transform 0.3s;
+  }
+
+  .btn-primary:hover svg {
+    transform: translateX(3px);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.85rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto-secundario);
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+    background: rgba(6, 182, 212, 0.05);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--cor-primaria), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+
+  /* ===== METRICS ===== */
+  .metrics {
+    position: relative;
+    border-top: 1px solid var(--cor-borda);
+    border-bottom: 1px solid var(--cor-borda);
+    background: var(--cor-superficie);
+  }
+
+  .metrics-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+    gap: 2rem;
+  }
+
+  .metric-item {
+    text-align: center;
+    flex: 1;
+  }
+
+  .metric-value {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+
+  .metric-label {
+    font-size: 0.8rem;
+    color: var(--cor-texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  .metric-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--cor-borda);
+  }
+
+  /* ===== PROJETOS ===== */
+  .projetos {
+    padding: 6rem 0;
   }
 
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 4rem 2rem;
+    padding: 0 2rem;
   }
 
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+  .section-header {
     text-align: center;
+    margin-bottom: 3.5rem;
+  }
+
+  .section-tag {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--cor-primaria);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-desc {
+    color: var(--cor-texto-secundario);
+    font-size: 1.05rem;
   }
 
   .grid-projetos {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 2rem;
   }
 
   .card-projeto {
+    position: relative;
     background: var(--cor-superficie);
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
     color: var(--cor-texto);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 1px solid var(--cor-borda);
   }
 
   .card-projeto:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 60px rgba(6, 182, 212, 0.1);
     color: var(--cor-texto);
+    border-color: rgba(6, 182, 212, 0.3);
+  }
+
+  .card-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-main);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .card-projeto:hover .card-border {
+    opacity: 1;
   }
 
   .card-imagem {
@@ -237,18 +674,54 @@ const base = import.meta.env.BASE_URL;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .card-projeto:hover .card-imagem img {
+    transform: scale(1.05);
+  }
+
+  .card-scan {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      rgba(6, 182, 212, 0.03) 45%,
+      rgba(6, 182, 212, 0.06) 50%,
+      rgba(6, 182, 212, 0.03) 55%,
+      transparent 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s;
+    animation: scanLine 3s linear infinite;
+    pointer-events: none;
+  }
+
+  .card-projeto:hover .card-scan {
+    opacity: 1;
+  }
+
+  @keyframes scanLine {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
   }
 
   .badge {
     position: absolute;
     top: 1rem;
     right: 1rem;
-    background: var(--cor-primaria);
+    background: var(--gradient-main);
     color: white;
-    padding: 0.25rem 0.75rem;
+    padding: 0.3rem 0.85rem;
     border-radius: 20px;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .card-conteudo {
@@ -257,16 +730,19 @@ const base = import.meta.env.BASE_URL;
 
   .card-conteudo h3 {
     margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
   .card-conteudo p {
     color: var(--cor-texto-secundario);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     margin-bottom: 1rem;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    line-height: 1.6;
   }
 
   .stack {
@@ -276,22 +752,31 @@ const base = import.meta.env.BASE_URL;
   }
 
   .tech {
-    background: rgba(99, 102, 241, 0.2);
-    color: var(--cor-secundaria);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(6, 182, 212, 0.08);
+    color: var(--cor-primaria);
+    padding: 0.3rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 500;
+    border: 1px solid rgba(6, 182, 212, 0.1);
   }
 
-  .sobre, .contato {
+  .tech-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--cor-primaria);
+    flex-shrink: 0;
+  }
+
+  /* ===== SOBRE ===== */
+  .sobre {
+    padding: 6rem 0;
     background: var(--cor-superficie);
-  }
-
-  .sobre p, .contato p {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-    color: var(--cor-texto-secundario);
+    position: relative;
   }
 
   .sobre-content {
@@ -299,223 +784,370 @@ const base = import.meta.env.BASE_URL;
     margin: 0 auto;
   }
 
-  .sobre-content > p {
-    max-width: 100%;
+  .sobre-bio {
     text-align: center;
     font-size: 1.1rem;
     line-height: 1.8;
+    color: var(--cor-texto-secundario);
+    max-width: 700px;
+    margin: 0 auto 3rem;
   }
 
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin: 2rem 0;
-  }
-
-  .skill-card {
-    background: var(--cor-fundo);
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid rgba(99, 102, 241, 0.2);
-  }
-
-  .skill-card h3 {
-    color: var(--cor-primaria);
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-  }
-
-  .skill-card p {
-    text-align: left;
-    font-size: 0.9rem;
-  }
-
-  .experiencias-titulo {
-    text-align: center;
+  .sobre-bio strong {
     color: var(--cor-texto);
-    margin: 2rem 0 1rem;
   }
 
-  .experiencias {
+  /* Skills Constellation */
+  .skills-constellation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .constellation-category {
+    background: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .constellation-title {
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--cor-primaria);
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+  }
+
+  .constellation-title svg {
+    color: var(--cor-primaria);
+    flex-shrink: 0;
+  }
+
+  .node-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .node {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--cor-texto-secundario);
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 6px;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .node:hover {
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+    background: rgba(6, 182, 212, 0.05);
+    box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);
+  }
+
+  /* Timeline */
+  .timeline-section {
     margin-bottom: 2rem;
   }
 
-  .exp-item {
+  .timeline-heading {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .timeline {
+    position: relative;
+    padding-left: 2.5rem;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 8px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--cor-primaria), var(--cor-secundaria), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-node {
+    position: absolute;
+    left: -2.5rem;
+    top: 0.25rem;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
     background: var(--cor-fundo);
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    border-left: 3px solid var(--cor-primaria);
+    border: 2px solid var(--cor-primaria);
+    z-index: 1;
   }
 
-  .exp-item strong {
+  .timeline-node::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--cor-primaria);
+    animation: nodePulse 2s ease-in-out infinite;
+  }
+
+  @keyframes nodePulse {
+    0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 1; transform: translate(-50%, -50%) scale(1.3); }
+  }
+
+  .timeline-card {
+    background: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.3s;
+  }
+
+  .timeline-card:hover {
+    border-color: rgba(6, 182, 212, 0.3);
+  }
+
+  .timeline-role {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
     color: var(--cor-texto);
+    margin-bottom: 0.2rem;
   }
 
-  .exp-item p {
-    text-align: left;
-    margin-top: 0.5rem;
-    font-size: 0.9rem;
+  .timeline-company {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--cor-primaria);
+    font-family: var(--font-mono);
+    margin-bottom: 0.75rem;
+  }
+
+  .timeline-card p {
+    color: var(--cor-texto-secundario);
+    font-size: 0.88rem;
+    line-height: 1.6;
   }
 
   .formacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--cor-texto-secundario);
+    font-size: 0.95rem;
+    padding-top: 1rem;
+  }
+
+  .formacao svg {
+    color: var(--cor-primaria);
+    flex-shrink: 0;
+  }
+
+  .formacao strong {
+    color: var(--cor-texto);
+  }
+
+  /* ===== CONTATO ===== */
+  .contato {
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contato-content {
     text-align: center;
-    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contato h2 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    font-weight: 700;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .contato > .container > .contato-content > p {
+    color: var(--cor-texto-secundario);
+    font-size: 1.05rem;
+    margin-bottom: 2.5rem;
   }
 
   .links-contato {
     display: flex;
     justify-content: center;
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 1.5rem;
+    flex-wrap: wrap;
   }
 
-  .links-contato a {
-    background: var(--cor-fundo);
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+  .contato-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.5rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 10px;
+    color: var(--cor-texto-secundario);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    background: var(--cor-superficie);
+  }
+
+  .contato-link:hover {
+    border-color: var(--cor-primaria);
+    color: var(--cor-primaria);
+    box-shadow: 0 0 25px rgba(6, 182, 212, 0.12);
+    transform: translateY(-2px);
+  }
+
+  .contato-link svg {
+    transition: color 0.3s;
+  }
+
+  .contato-link:hover svg {
+    color: var(--cor-primaria);
+  }
+
+  .grid-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(6, 182, 212, 0.06) 1px, transparent 1px);
+    background-size: 30px 30px;
+    pointer-events: none;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .skills-constellation {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 768px) {
-    .hero {
+    .hero-content {
       padding: 1.5rem;
     }
 
-    .hero-container {
+    .metrics-container {
       flex-direction: column;
-      text-align: center;
-      gap: 2rem;
+      gap: 1.5rem;
+      padding: 2rem 1.5rem;
     }
 
-    .hero-content {
-      text-align: center;
+    .metric-divider {
+      width: 60px;
+      height: 1px;
     }
 
-    .foto-perfil {
-      width: 200px;
-      height: 200px;
-    }
-
-    .hero h1 {
-      font-size: 2rem;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
+    .projetos, .sobre, .contato {
+      padding: 4rem 0;
     }
 
     .container {
-      padding: 3rem 1.5rem;
+      padding: 0 1.5rem;
     }
 
     .grid-projetos {
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: 1fr;
       gap: 1.5rem;
     }
 
-    .skills-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .hero {
-      padding: 1rem;
+    .timeline {
+      padding-left: 2rem;
     }
 
-    .foto-perfil {
-      width: 180px;
-      height: 180px;
+    .timeline-node {
+      left: -2rem;
+      width: 14px;
+      height: 14px;
     }
 
-    .hero h1 {
-      font-size: 1.75rem;
-    }
-
-    .hero p {
-      font-size: 1rem;
-    }
-
-    .container {
-      padding: 2.5rem 1.25rem;
-    }
-
-    .grid-projetos {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
+    .timeline-node::after {
+      width: 4px;
+      height: 4px;
     }
 
     .links-contato {
       flex-direction: column;
-      gap: 1rem;
+      align-items: center;
     }
 
-    .links-contato a {
+    .contato-link {
       width: 100%;
-      text-align: center;
+      max-width: 280px;
+      justify-content: center;
     }
   }
 
   @media (max-width: 480px) {
-    .hero {
-      min-height: calc(100vh - 100px);
-      padding: 1rem;
-    }
-
-    .hero-container {
-      gap: 1.5rem;
-    }
-
-    .foto-perfil {
-      width: 150px;
-      height: 150px;
-    }
-
-    .hero h1 {
-      font-size: 1.5rem;
-    }
-
-    .hero p {
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .btn {
-      padding: 0.65rem 1.5rem;
-      font-size: 0.9rem;
-    }
-
     .container {
-      padding: 2rem 1rem;
+      padding: 0 1rem;
     }
 
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
+    .section-header {
+      margin-bottom: 2.5rem;
     }
 
-    .card-conteudo h3 {
-      font-size: 1.1rem;
+    .card-imagem {
+      height: 170px;
     }
 
-    .sobre-content > p {
-      font-size: 1rem;
+    .card-conteudo {
+      padding: 1.25rem;
     }
 
-    .exp-item {
-      padding: 0.75rem 1rem;
-    }
-
-    .exp-item strong {
-      font-size: 0.95rem;
-    }
-
-    .exp-item p {
-      font-size: 0.85rem;
+    .timeline-card {
+      padding: 1rem 1.25rem;
     }
   }
 
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-indicator,
+    .card-scan {
+      display: none;
+    }
+
+    .timeline-node::after {
+      animation: none;
+    }
+
+    .card-projeto:hover {
+      transform: none;
+    }
+
+    .btn-primary:hover {
+      transform: none;
+    }
+
+    .contato-link:hover {
+      transform: none;
+    }
+  }
 </style>
